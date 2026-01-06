@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <div id="app"></div>
+    <script>
+        const vm = Vue.createApp({ <!-- *Inicio de Vue -->
+            data(){
+                return{
+                   text: "<h1> Hola Vue </h1>",
+                   mensaje: "hola mundo",
+                };
+            },
+            //! sirve para  sirve para definir la estructura HTML de un componente asi ya no se escribe directamente en html vanila   
+            template: `<div v-once v-html="text"></div>`, // para mostrar html (no se recomienda con inputs de usuario)
+            //template: `<div v-once v-text="mensaje"></div>` // para mostrar texto
+        }).mount('#app');
+        
+    </script>
+</body>
+</html>
