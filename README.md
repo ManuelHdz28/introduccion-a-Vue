@@ -1,3 +1,4 @@
 # introduccion-a-Vue
 
-# curso de fundamentos de VUE de Platzi
+## curso de fundamentos de VUE de Platzi
+hecho por Manuel Hernandez
