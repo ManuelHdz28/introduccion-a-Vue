@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--Manipulacion Reactiva de Atributos HTML con VUE-->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <div id="app">
+       
+    </div>
+    <script>
+        const vm = Vue.createApp({ <!-- *Inicio de Vue -->
+            data(){
+                return{
+                   img: "https://picsum.photos/500/300",
+                   alt: "imagen"
+                };
+            },
+            template: ` <img v-bind:["src"]="img" v-bind:alt="img" />`
+            /*
+                Cuando se utiliza para unir el class o style atributo, 
+                v-bind admite tipos de valores adicionales como matrices u objetos. 
+            */
+        }).mount('#app');
+        
+    </script>
+</body>
+</body>
+</html>
