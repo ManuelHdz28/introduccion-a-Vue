@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Ejercicio 1 eventos de usuario y reactividad</title>
+</head>
+<body>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <div id="app"></div>
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return{
+                    evt: "submit",
+                    counter: 0
+                    
+                };
+            },
+            methods:{
+                
+               increment(){
+                this.counter++;
+               },
+               decrement(){
+                if(this.counter > 0) this.counter--;
+               },
+               reset(){
+                if(this.counter != 0) this.counter = 0;
+                
+               }
+            },
+            template: `
+            
+            <h2 mbt-1> contador: {{ counter }}</h2>
+            <button v-on:click="decrement" class="btn btn-primary"> - </button> 
+            <button v-on:click="reset" class="btn btn-primary"> Reset </button>
+            <button v-on:click="increment" class="btn btn-primary"> + </button>
+            
+            
+            `
+
+        }).mount('#app');
+
+    </script>
+    <style>
+        button{
+                    margin: 5px;
+                    width: fit-content;
+                    height: 50px;
+                    font-size: 100px;
+                    justify-content: center;
+                    align-items: center;
+                }
+                div{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                h2{
+                    font-size: 40px;
+                    align-items: center;
+                    justify-content: center;
+                    display: flex;
+                }
+               
+            </style>
+</body>
+</html>
