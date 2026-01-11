@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reactividad de inputs: sincronizacion vista Modelo</title>
+</head>
+<body>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <h1>Reactividad de inputs: sincronizacion vista Modelo</h1>
+    <div id="app"></div>
+    <script>
+        const vm = Vue.createApp({ //* aqui se crea la aplicacion de vue */
+            data(){ //* aqui van las variables */
+                return{ //* esto crea una variable reactiva
+                    text: "hola Vue" //* vartiable reactiva es una variable que al cambiar su valor, actualiza la vista
+
+                };
+            },
+            methods:{ //* aqui van las funciones */
+                input(e){ //* e es el evento que se genera al cambiar el input
+                    this.text = e.target.value; //* se actualiza la variable reactiva con el valor del input
+                }
+            },
+            template: //* aqui va el html que se va a renderizar 
+            ` 
+            <p>{{ text }}</p>
+            <input type="text" @input="input" v-model="text"/>`
+            }).mount('#app'); //* aqui se monta la aplicacion en el div con id app
+        
+    </script>
+</body>
+</html>

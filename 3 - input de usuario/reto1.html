@@ -37,13 +37,22 @@
             <button v-on:click="decrement" class="btn btn-primary"> - </button> 
             <button v-on:click="reset" class="btn btn-primary"> Reset </button>
             <button v-on:click="increment" class="btn btn-primary"> + </button>
-            
+            <i data-lucide="angry"></i> 
             
             `
 
         }).mount('#app');
 
     </script>
+    <script>
+import { createIcons, angry } from 'lucide';
+
+createIcons({
+  icons: {
+    angry
+  }
+});
+</script>
     <style>
         button{
                     margin: 5px;
