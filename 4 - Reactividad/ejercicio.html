@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<h1>Propiedades Computadas</h1>
+<div id="app"></div>
+    <script>
+        const vm = Vue.createApp({
+                data() {
+                    return {
+                       firstname: "manuel", // propiedad reactiva. una propiedad reactiva es aquella que Vue monitorea para detectar cambios y actualizar la interfaz de usuario en consecuencia.
+                       lastname: "hernandez",
+                       now: new Date()
+                    };
+                },
+                computed:{ // Las propiedades computadas son funciones que se definen dentro del objeto computed. Estas funciones se comportan como propiedades reactivas y su valor se calcula en función de otras propiedades reactivas definidas en el objeto data.
+                    fullname(){
+                        return `${this.firstname} ${this.lastname}`; // Concatenacion de firstname y lastname usando template strings
+                    },
+                    today(){
+                        return this.now.toDateString(); // Convierte el objeto Date a una cadena legible
+                    }
+
+                },
+                methods: { //* El objeto methods se utiliza para definir funciones que pueden ser llamadas desde la plantilla o desde otras partes de la instancia de Vue.
+                   
+                },
+                template:
+                    `
+                    <div>nombre: {{ firstname }} - apellido: {{ lastname }}</div> <!-- Concatenacion de propiedades data -->
+                    <div>nombre Completo: {{ fullname }}</div> <!-- Uso de propiedad computada -->
+                    <div>fecha de hoy: {{ today }}</div>` //* uso de propiedad computada
+            }).mount('#app'); 
+    </script>
+</body>
+</html>

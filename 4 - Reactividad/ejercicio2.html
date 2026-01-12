@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Watchers</h2>
+    <p>Los watchers son funciones que observan cambios en una propiedad reactiva y se ejecutan automáticamente cuando esa propiedad cambia.</p>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <div id="app"></div>
+    <script>
+        const vm = Vue.createApp({
+            data(){
+                return{
+                    text: "Puerta Cerrada",
+                    open: false,
+                };
+            },
+            methods:{
+
+            },
+            watch:{ //* El objeto watch se utiliza para definir funciones que observan cambios en propiedades reactivas específicas.
+                open(value){
+                    if (value){
+                        this.text = "Puerta Abierta";
+                    } else {
+                        this.text = "Puerta Cerrada";
+                    }
+                }
+                
+            },
+            computed:{
+            label(){
+                return this.open ? "Cerrar Puerta" : "Abrir Puerta"
+            }
+            },
+            template: `<div>{{ text }}</div> 
+                        <button @click="open = !open">{{ label }}</button>`,
+
+        }).mount('#app');
+    </script>
+</body>
+</html>

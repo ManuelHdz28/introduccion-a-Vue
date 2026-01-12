@@ -9,13 +9,13 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <div id="app">{{ text }}</div>
     <script>
-        const vm = Vue.createApp({ <!-- *Inicio de Vue -->
+        const vm = Vue.createApp({ <!-- *Inicio de Vue --> // esto se usa para crear una nueva instancia de Vue
             data(){
-                return{
+                return{ //* return se usa para devolver un objeto con las propiedades reactivas. reactivas son aquellas que Vue monitorea para detectar cambios y actualizar la interfaz de usuario en consecuencia.
                    text: "Hola Vue"
                 };
             }
-        }).mount('#app');
+        }).mount('#app'); //* Montar la instancia en el elemento con id "app"
 
         console.log(vm);
     </script>
