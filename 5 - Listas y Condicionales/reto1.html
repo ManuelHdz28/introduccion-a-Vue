@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+        <div id="app"></div>
+        <script>
+        const vm = Vue.createApp({
+                data() {
+                    return {
+                        text: "Accede a tu Cuenta",
+                        open: false,
+                        username: "",
+                        fecha: new Intl.DateTimeFormat('es-ES').format(new Date()),
+                        nuevoPosts: { //* Arreglo de objetos para demostrar listas en formato json */
+                            title: "",
+                            fechaLista: new Intl.DateTimeFormat('es-ES').format(new Date()),
+                            description: ""
+                        },
+                        posts:[],
+                        
+                    };
+                },
+                methods: {
+                    agregarPost() {
+                        const postParaGuardar = { ...this.nuevoPosts };   // Crear una copia del objeto nuevoPosts
+                        this.posts.push(postParaGuardar); // Agregar la copia al arreglo posts
+                        this.vaciarCasillasFormulario();   // Limpiar las casillas del formulario y el objeto nuevoPost
+                    },
+                   vaciarCasillasFormulario() {
+                        this.nuevoPosts.title = "";
+                        this.nuevoPosts.description = "";
+                   }
+                },
+                watch: { //* El objeto watch se utiliza para definir funciones que observan cambios en propiedades reactivas específicas.
+                    open(value) { //* Cuando la propiedad 'open' cambia de valor, esta función se ejecuta automáticamente.
+                        if (value) {
+                            this.text = "Acceso Concedido";
+                            
+                        } else {
+                            this.text = "Accede a tu Cuenta";
+                            this.username = "";
+                    
+                            
+                        }
+                    },
+                    
+
+                },
+                computed: {
+                    label() {
+                        return this.open ? "Cerrar Sesion" : "Acceder"
+                    }
+                },
+                template: `<div class="container" :class="{ closed: !open, open: open }">
+                    
+                    <h1>{{ text }} </h1>
+                    <div v-if="open">
+                        <p> Hola, {{ username }}! Bienvenido de nuevo. </p>
+                        <div class="formulario">
+                            
+                            <div>
+                                <div>Titulo:</div>
+                                <input type="text" v-model="nuevoPosts.title" />
+                                <div >Descripción:</div>
+                                <textarea  v-model="nuevoPosts.description"></textarea>
+                                
+                            </div>
+                            <button @click="agregarPost()" type="submit" class="btn">Enviar</button>
+                            
+                            
+                            
+                        </div>
+
+                        <div   class="list">
+                            <div v-if="posts.length === 0">No hay posts aún.</div>
+                            <div v-for="(post,i) in posts" :key="i" class="item"> <!-- Directiva de Vue para listas: v-for se le pone i debido a  -->
+                                <div>{{ post.title }}</div>
+                                <div >{{post.fechaLista}}</div>
+                                <hr/>
+                                <p>{{ post.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <div>
+                            <div>Digite su nombre:</div>
+                        <input type="text" id="username" v-model="username" />
+                        </div>
+                        
+                    </div>
+                        <button @click="open = !open">
+                            <div v-if="!open">Acceder</div> <!-- Esto es una condicional de Vue: Si open es false muestra Acceder -->
+                            <div v-else>Cerrar Sesion</div> <!-- Esto es una condicional de Vue: Si open es true muestra Cerrar Sesion -->
+                        </button>
+                        </div>`,
+
+            }).mount('#app');
+    </script>
+        <style>
+        html,
+        body {
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    
+        #app,
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+    
+        button {
+            margin-top: 24px;
+            border: none;
+            background-color: white;
+            padding: 8px 24px;
+            border-radius: 12px;
+        }
+    
+        .closed {
+            background-color: #eca1a6;
+        }
+    
+        .open {
+            background-color: #b5e7a0;
+        }
+        .list{
+            display: flex;
+            flex-direction: column;
+        }
+        .item{
+            border: 1px solid #ccc;
+            background-color: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .title{
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+    </style>
+    </body>
+</html>
