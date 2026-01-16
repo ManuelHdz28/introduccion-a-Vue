@@ -18,8 +18,25 @@
                         text: "Accede a tu Cuenta",
                         open: false,
                         username: "",
-                        password: ""
-                        
+                        password: "",
+                        posts: [{ //* Arreglo de objetos para demostrar listas en formato json */
+                            title: "Un titulo 1",
+                            description: "Un texto descriptivo"
+
+                        },
+                        {
+                            title: "Un titulo 2",
+                            description: "Un texto descriptivo"
+                        },
+                        {
+                            title: "Un titulo 3",
+                            description: "Un texto descriptivo"
+                        },
+                        {
+                            title: "Un titulo 4",
+                            description: "Un texto descriptivo"
+                        }
+                        ]
                     };
                 },
                 methods: {
@@ -50,14 +67,20 @@
                     <h1>{{ text }} </h1>
                     <div v-if="open">
                         <p> Hola, {{ username }}! Bienvenido de nuevo. </p>
+                        <div class="list">
+                            <div v-for="(post,i) in posts" :key="i" class="item"> <!-- Directiva de Vue para listas: v-for se le pone i debido a  -->
+                                <div class="title">{{ post.title }}</div>
+                                <p>{{ post.description }}</p>
+                            </div>
+                        </div>
                     </div>
                     <div v-else>
                         <div>
-                        <label for="username">Usuario:</label>
+                            <div>Username:</div>
                         <input type="text" id="username" v-model="username" />
                         </div>
                         <div>
-                        <label for="password">Contraseña:</label>
+                        <div>Password:</div>
                         <input type="password" id="password" v-model="password" />
                         </div>
                     </div>
@@ -101,6 +124,23 @@
     
         .open {
             background-color: #b5e7a0;
+        }
+        .list{
+            display: flex;
+            flex-direction: column;
+        }
+        .item{
+            border: 1px solid #ccc;
+            background-color: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .title{
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.2em;
         }
     </style>
     </body>
