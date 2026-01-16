@@ -19,6 +19,7 @@
                         open: false,
                         username: "",
                         password: "",
+                        fecha: new Intl.DateTimeFormat('es-ES').format(new Date()),
                         posts: [{ //* Arreglo de objetos para demostrar listas en formato json */
                             title: "Un titulo 1",
                             description: "Un texto descriptivo"
@@ -36,7 +37,7 @@
                             title: "Un titulo 4",
                             description: "Un texto descriptivo"
                         }
-                        ]
+                        ],
                     };
                 },
                 methods: {
@@ -70,6 +71,8 @@
                         <div class="list">
                             <div v-for="(post,i) in posts" :key="i" class="item"> <!-- Directiva de Vue para listas: v-for se le pone i debido a  -->
                                 <div class="title">{{ post.title }}</div>
+                                <div class="date">{{ fecha }}</div>
+                                <hr/>
                                 <p>{{ post.description }}</p>
                             </div>
                         </div>
