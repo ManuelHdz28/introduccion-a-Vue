@@ -16,7 +16,7 @@
                         text: "Accede a tu Cuenta",
                         open: false,
                         username: "",
-                        fecha: new Intl.DateTimeFormat('es-ES').format(new Date()),
+                        
                         nuevoPosts: { //* Arreglo de objetos para demostrar listas en formato json */
                             title: "",
                             fechaLista: new Intl.DateTimeFormat('es-ES').format(new Date()),
@@ -71,7 +71,7 @@
                                 <textarea  v-model="nuevoPosts.description"></textarea>
                                 
                             </div>
-                            <button @click="agregarPost()" type="submit" class="btn">Enviar</button>
+                            <button class="btnEnviar" @click="agregarPost()" type="submit" class="btn">✅ Enviar</button>
                             
                             
                             
@@ -84,6 +84,7 @@
                                 <div >{{post.fechaLista}}</div>
                                 <hr/>
                                 <p>{{ post.description }}</p>
+                                <button class="btnEliminar" @click="posts.splice(i, 1)">❌ Eliminar Post</button>
                             </div>
                         </div>
                     </div>
@@ -108,7 +109,10 @@
             height: 100vh;
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
+           
+            
         }
+
     
         #app,
         .container {
@@ -131,15 +135,47 @@
         .closed {
             background-color: #eca1a6;
         }
+        .btnEliminar{
+            margin-top: 12px;
+            border: none;
+            background-color: #eca1a6;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .btnEnviar{
+            margin-top: 12px;
+            border: none;
+            background-color: #76c893;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
     
         .open {
-            background-color: #b5e7a0;
+            background-color: #2f5a75;
         }
         .list{
             display: flex;
             flex-direction: column;
         }
         .item{
+            border: 1px solid #ccc;
+            background-color: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .formulario{/* Estilos para el formulario de agregar posts hacer que el input y el textarea tengan la misma anchura */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            width: 100%;
+            margin-bottom: 16px;
             border: 1px solid #ccc;
             background-color: white;
             padding: 12px;

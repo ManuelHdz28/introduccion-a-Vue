@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <h2>Componentes Reutilizables: Separacion y Uso Eficiente</h2>
+        <p>Los componentes reutilizables permiten separar la lógica y la
+            presentación de una aplicación Vue.js en partes independientes que
+            pueden ser reutilizadas en diferentes partes del proyecto.</p>
+        <div id="app"></div>
+        <script>
+        const app = Vue.createApp({
+                data() {
+                    return {
+                        text: "Accede a tu Cuenta",
+                        open: false,
+                        username: "",
+                        
+                        posts: [{ //* Arreglo de objetos para demostrar listas en formato json */
+                            title: "Un titulo 1",
+                            description: "Un texto descriptivo"
+
+                        },
+                        {
+                            title: "Un titulo 2",
+                            description: "Un texto descriptivo"
+                        },
+                        {
+                            title: "Un titulo 3",
+                            description: "Un texto descriptivo"
+                        },
+                        {
+                            title: "Un titulo 4",
+                            description: "Un texto descriptivo"
+                        }
+                        ],
+                    };
+                },
+                methods: {
+
+                },
+                watch: { //* El objeto watch se utiliza para definir funciones que observan cambios en propiedades reactivas específicas.
+                    open(value) {
+                        if (value) {
+                            this.text = "Acceso Concedido";
+                            
+                        } else {
+                            this.text = "Accede a tu Cuenta";
+                            this.username = "";
+                            this.password = "";
+                    
+                            
+                        }
+                    }
+
+                },
+                computed: {
+                    label() {
+                        return this.open ? "Cerrar Sesion" : "Acceder"
+                    }
+                },
+                template: `<div class="container" :class="{ closed: !open, open: open }">
+                    
+                    <h1>{{ text }} </h1>
+                    <div v-if="open">
+                        <p> Hola, {{ username }}! Bienvenido de nuevo. </p>
+                        <div class="list">
+                            <item v-for="(post, i) in posts" :key="i" :post="post"></item> <!-- Uso del componente 'item' dentro de un bucle v-for para mostrar la lista de posts -->
+                        </div>
+                    </div>
+                    <div v-else>
+                        <div>
+                            <div>Username:</div>
+                        <input type="text" id="username" v-model="username" />
+                        </div>
+                        <div>
+                       
+                    </div>
+                        <button @click="open = !open">
+                            <div v-if="!open">Acceder</div> <!-- Esto es una condicional de Vue: Si open es false muestra Acceder -->
+                            <div v-else>Cerrar Sesion</div> <!-- Esto es una condicional de Vue: Si open es true muestra Cerrar Sesion -->
+                        </button>
+                        </div>`,
+
+            });
+
+            app.component('item', { //* Definición del componente 'item'
+                props: ['post'], //* El componente recibe una propiedad 'post' que contiene los datos del post individual.
+               template:`<div class="item"> <!-- Directiva de Vue para listas: v-for se le pone i debido a  -->
+                                <div class="title">{{ post.title }}</div>
+                                <hr/>
+                                <p>{{ post.description }}</p>
+                            </div>`,
+
+            });
+            
+            const vm = app.mount('#app');
+    </script>
+        <style>
+        html,
+        body {
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    
+        #app,
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+    
+        button {
+            margin-top: 24px;
+            border: none;
+            background-color: white;
+            padding: 8px 24px;
+            border-radius: 12px;
+        }
+    
+        .closed {
+            background-color: #eca1a6;
+        }
+    
+        .open {
+            background-color: #b5e7a0;
+        }
+        .list{
+            display: flex;
+            flex-direction: column;
+        }
+        .item{
+            border: 1px solid #ccc;
+            background-color: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .title{
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+    </style>
+    </body>
+</html>
