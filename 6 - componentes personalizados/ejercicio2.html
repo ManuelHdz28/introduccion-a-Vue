@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <h2>uso de slots en componentes para layouts reutilizables</h2>
+        <p>los slots son elementos que permiten insertar contenido dinámico
+            dentro de componentes Vue.js.</p>
+        <div id="app"></div>
+        <script>
+        const app = Vue.createApp({
+                data() {
+                    return {
+                        
+                    };
+                },
+               
+                
+                template: `
+                <div> <!-- componente padre -->
+                    <v-layout>
+                        <template v-slot:header>
+                            <button>Titulo del Header</button>
+                        </template>
+                        <template v-slot:content>
+                            <p> Este es el contenido principal del layout. </p>
+                        </template>
+                    </v-layout> <!-- uso del componente layout -->
+                </div>`,
+
+            });
+
+            app.component("v-layout", {
+                template: `  <!-- componente hijo --> <!-- los slots actuan como marcadores de posición para el contenido dinámico -->
+                    <header>
+                        <slot name="header"></slot> <!-- slot para insertar contenido dinámico -->
+                    </header>
+                    <div><slot name="content"></slot></div>`,
+            });
+            
+            const vm = app.mount('#app');
+
+    </script>
+        
+    </style>
+    </body>
+</html>
